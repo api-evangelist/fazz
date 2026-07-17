@@ -1,0 +1,69 @@
+aid: fazz
+name: Fazz
+review:
+  question: Does Fazz expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-17'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. Fazz's only asynchronous surface is
+    HTTP POST webhook callbacks (docs.fazz.com/docs/callbacks), which are
+    outbound request/response HTTP notifications, not a streaming or
+    WebSocket transport. There is no Server-Sent Events (SSE) or WebSocket
+    surface documented that would warrant an AsyncAPI channel model under
+    current API Evangelist scope.
+findings:
+  summary: |
+    Fazz (Fazz Business / Xfers) does not publish a documented public
+    WebSocket API. The Fazz Payments API is a REST (HTTPS) API served under
+    https://www.xfers.io/api/v4 (production) and https://sandbox.xfers.io/api/v4
+    (sandbox), authenticated with HTTP Basic auth (API key as username,
+    secret key as password). Asynchronous status updates are delivered via
+    outbound HTTP POST webhook callbacks to a merchant-configured endpoint,
+    secured with an account signing secret. No ws:// or wss:// endpoint is
+    documented for payments, disbursements, or callbacks.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://www.xfers.io/api/v4
+      documented: true
+    - protocol: Webhook
+      scheme: https
+      note: Outbound HTTP POST callbacks to the merchant endpoint in JSON, verified with an account signing secret. Not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the Fazz/Xfers developer reference (Singapore v4 or Indonesia v4-ID) as of the review date.
+  endpointsConfirmedRest:
+    - POST https://www.xfers.io/api/v4/payments
+    - GET  https://www.xfers.io/api/v4/payments
+    - GET  https://www.xfers.io/api/v4/payments/{paymentId}
+    - POST https://www.xfers.io/api/v4/payment_methods/{type}
+    - GET  https://www.xfers.io/api/v4/payment_methods/{paymentMethodId}/payments
+    - POST https://www.xfers.io/api/v4/disbursements
+    - GET  https://www.xfers.io/api/v4/disbursements
+    - GET  https://www.xfers.io/api/v4/disbursements/{disbursementId}
+sources:
+  - url: https://docs.fazz.com/
+    type: Documentation
+    note: Singapore Payments API home; documents REST endpoints under /api/v4. No WebSocket mentioned.
+  - url: https://docs.fazz.com/docs/authentication
+    type: Documentation
+    note: HTTP Basic auth over HTTPS; example uses https://www.xfers.io/api/v4/payments.
+  - url: https://docs.fazz.com/docs/callbacks
+    type: Documentation
+    note: Callbacks are HTTP POST webhooks in JSON, secured by a signing secret; not WebSocket.
+  - url: https://docs.fazz.com/v4-ID/docs/home
+    type: Documentation
+    note: Indonesia Payments API (v4-ID); same REST/webhook model, no WebSocket surface.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: false
+  reason: |
+    No WebSocket protocol surface exists, and no SSE stream is documented.
+    The only asynchronous mechanism is outbound HTTP webhook callbacks,
+    which are not in scope for AsyncAPI/WebSocket modeling here. The
+    WebSocket review question is answered false and no AsyncAPI document
+    or apis.yml AsyncAPI pointer was added.

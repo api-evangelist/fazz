@@ -1,0 +1,35 @@
+generated: '2026-07-17'
+method: searched
+probe: true
+source: https://fazz.com/ ; https://docs.fazz.com/
+url: https://fazz.com/
+certifications: []
+regulatory:
+- authority: Monetary Authority of Singapore (MAS)
+  note: >-
+    Fazz Business Singapore operates through Xfers Pte. Ltd., which is
+    regulated under Singapore's Payment Services Act. Confirm current
+    Major Payment Institution licence status on the MAS Financial
+    Institutions Directory during reconciliation.
+  confidence: reported-unverified
+- authority: Bank Indonesia / OJK
+  note: >-
+    Fazz's Indonesia operations (formerly Payfazz / PT) are subject to
+    Bank Indonesia and OJK payment regulation. Verify specific licences
+    during reconciliation.
+  confidence: reported-unverified
+evidence:
+- source: https://fazz.com/business/products/payments-api/
+  note: >-
+    Product page markets "send and receive payments securely" but does not
+    enumerate PCI DSS / ISO 27001 / SOC 2 certifications.
+- source: probe
+  note: >-
+    No /.well-known/security.txt found on fazz.com or www.xfers.io (HTTP 404),
+    and no dedicated public trust-center / compliance page was located via
+    search as of the generated date.
+notes: >-
+  No first-party trust center enumerating security certifications was found.
+  Regulatory posture is recorded as reported-unverified pending confirmation
+  against MAS / Bank Indonesia / OJK registries. Do not represent
+  certifications that are not published by the provider.

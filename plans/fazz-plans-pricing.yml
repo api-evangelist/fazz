@@ -1,0 +1,105 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Fazz
+providerId: fazz
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: false
+tags:
+- Fintech
+- Payments
+- Business Banking
+- Disbursements
+- Plans
+description: >-
+  Fazz Business offers a business account from S$0 with no monthly minimum,
+  then charges per-transaction fees on payments (Accept API) and
+  disbursements (Send API). Per-method transaction rates (PayNow, virtual
+  bank account, bank-transfer payout) are quoted per merchant and are not
+  published as a flat public rate card; the pricing page positions
+  "upfront, competitive rates" and directs businesses to sign up or
+  contact sales. Singapore is billed in SGD; Indonesia in IDR.
+notes: >-
+  Fazz does not publish a fixed per-call price list on its public pages;
+  transaction fees are account/quote based. Confirm exact per-method fees
+  in the Fazz Business dashboard or with sales during reconciliation. Values
+  below capture the published structure, not specific reconciled rates.
+sources:
+- https://fazz.com/en/pricing/
+- https://fazz.com/business/products/payments-api/
+- https://docs.fazz.com/
+plans:
+- id: fazz-business-account
+  name: Fazz Business Account
+  type: usage
+  description: >-
+    Business account with no monthly minimum (from S$0); pay per-transaction
+    fees on payments collected and payouts sent through the Payments API.
+  entries:
+  - label: Account Fee
+    name: account_fee
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: SG
+    unit: 1
+    price: from S$0 (no monthly minimum)
+    userMultiplied: false
+  - label: Accept - PayNow QR
+    name: accept_paynow
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: SG
+    unit: 1
+    price: per-transaction fee (quoted per merchant), SGD
+    userMultiplied: false
+  - label: Accept - Virtual Bank Account
+    name: accept_virtual_account
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: SG
+    unit: 1
+    price: per-transaction fee (quoted per merchant), SGD
+    userMultiplied: false
+  - label: Send - Bank Transfer Disbursement
+    name: send_disbursement
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: SG
+    unit: 1
+    price: per-payout fee (quoted per merchant), SGD
+    userMultiplied: false
+  elements:
+  - name: Accept API
+  - name: Send API
+  - name: Payment Methods API
+- id: fazz-indonesia
+  name: Fazz Indonesia (v4-ID)
+  type: usage
+  description: >-
+    Indonesia-market payments and disbursements billed in IDR via local
+    virtual accounts and bank transfers; per-method fees quoted per merchant.
+  entries:
+  - label: Indonesia Payments / Disbursements
+    name: indonesia_transactions
+    type: usage
+    metric: transactions
+    limit: -1
+    timeFrame: month
+    geo: ID
+    unit: 1
+    price: per-transaction fee (quoted per merchant), IDR
+    userMultiplied: false
+  elements:
+  - name: Indonesia Payments API
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

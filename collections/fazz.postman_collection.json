@@ -1,0 +1,159 @@
+{
+  "info": {
+    "name": "Fazz Payments API (Singapore v4)",
+    "description": "Fazz Business Payments API — Accept API (payments), Payment Methods, and Send API (disbursements). Modeled from https://docs.fazz.com/ (no first-party OpenAPI is published). Auth is HTTP Basic: API key as username, secret key as password. Production host www.xfers.io; sandbox sandbox.xfers.io.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      { "key": "username", "value": "{{apiKey}}", "type": "string" },
+      { "key": "password", "value": "{{secretKey}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://sandbox.xfers.io/api/v4", "type": "string" },
+    { "key": "apiKey", "value": "test_your_api_key", "type": "string" },
+    { "key": "secretKey", "value": "your_secret_key", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Payments (Accept API)",
+      "item": [
+        {
+          "name": "Create a payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payments",
+              "host": ["{{baseUrl}}"],
+              "path": ["payments"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 100.00,\n  \"currency\": \"SGD\",\n  \"referenceId\": \"order-0001\",\n  \"paymentMethodType\": \"paynow\",\n  \"paymentMethodOptions\": { \"fazz\": {} },\n  \"expiredAt\": \"2026-07-18T12:00:00Z\",\n  \"description\": \"Test PayNow payment\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get a list of payments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/payments",
+              "host": ["{{baseUrl}}"],
+              "path": ["payments"]
+            }
+          }
+        },
+        {
+          "name": "Get a payment",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/payments/:paymentId",
+              "host": ["{{baseUrl}}"],
+              "path": ["payments", ":paymentId"],
+              "variable": [
+                { "key": "paymentId", "value": "pay_example" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payment Methods",
+      "item": [
+        {
+          "name": "Create a payment method",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/payment_methods/virtual_bank_accounts",
+              "host": ["{{baseUrl}}"],
+              "path": ["payment_methods", "virtual_bank_accounts"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceId\": \"customer-0001\",\n  \"displayName\": \"Acme Pte Ltd\",\n  \"paymentMethodOptions\": { \"fazz\": {} }\n}"
+            }
+          }
+        },
+        {
+          "name": "Get a list of payments for a payment method",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/payment_methods/:paymentMethodId/payments",
+              "host": ["{{baseUrl}}"],
+              "path": ["payment_methods", ":paymentMethodId", "payments"],
+              "variable": [
+                { "key": "paymentMethodId", "value": "pm_example" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Disbursements (Send API)",
+      "item": [
+        {
+          "name": "Create a disbursement",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/disbursements",
+              "host": ["{{baseUrl}}"],
+              "path": ["disbursements"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 250.00,\n  \"currency\": \"SGD\",\n  \"referenceId\": \"payout-0001\",\n  \"disbursementMethod\": {\n    \"type\": \"bank_transfer\",\n    \"bankShortCode\": \"DBSSSGSG\",\n    \"accountNo\": \"1234567890\",\n    \"accountHolderName\": \"Jane Tan\"\n  },\n  \"description\": \"Vendor payout\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get a list of disbursements",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/disbursements",
+              "host": ["{{baseUrl}}"],
+              "path": ["disbursements"]
+            }
+          }
+        },
+        {
+          "name": "Get a disbursement",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/disbursements/:disbursementId",
+              "host": ["{{baseUrl}}"],
+              "path": ["disbursements", ":disbursementId"],
+              "variable": [
+                { "key": "disbursementId", "value": "disb_example" }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

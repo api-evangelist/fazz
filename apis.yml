@@ -1,0 +1,137 @@
+aid: fazz
+url: https://raw.githubusercontent.com/api-evangelist/fazz/refs/heads/main/apis.yml
+name: Fazz
+kind: company
+description: Fazz is a Southeast Asian business banking and payments group formed from
+  the 2021 merger of Indonesia's Payfazz and Singapore's Xfers. Its Fazz Business
+  Payments API (served on the xfers.io hosts) lets platforms accept payments via local
+  methods like PayNow QR and virtual bank accounts, and send bulk disbursements
+  across Singapore (SGD) and Indonesia (IDR). Not to be confused with the consumer-facing
+  Payfazz agent app.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Fintech
+- Payments
+- Business Banking
+- Disbursements
+- Southeast Asia
+- PayNow
+- Virtual Accounts
+created: '2026-07-17'
+modified: '2026-07-17'
+specificationVersion: '0.19'
+apis:
+- aid: fazz:fazz-accept-api
+  name: Fazz Accept API (Singapore)
+  tags:
+  - Payments
+  - Collections
+  - PayNow
+  - Virtual Accounts
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.fazz.com/reference/create-payment
+  baseURL: https://www.xfers.io/api/v4
+  properties:
+  - url: https://fazz.com/business/products/payments-api/
+    type: Documentation
+  - url: https://docs.fazz.com/reference/create-payment
+    type: APIReference
+  - url: openapi/fazz-openapi.yml
+    type: OpenAPI
+  description: Accept payments securely across local Singapore payment methods -
+    PayNow QR (UEN-based instant transfer) and virtual bank accounts - for one-time
+    or unlimited collections, billed in SGD.
+- aid: fazz:fazz-send-api
+  name: Fazz Send API (Singapore)
+  tags:
+  - Disbursements
+  - Payouts
+  - Bank Transfer
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.fazz.com/reference/create-disbursement
+  baseURL: https://www.xfers.io/api/v4
+  properties:
+  - url: https://fazz.com/business/products/payments-api/
+    type: Documentation
+  - url: https://docs.fazz.com/reference/create-disbursement
+    type: APIReference
+  - url: openapi/fazz-openapi.yml
+    type: OpenAPI
+  description: Send payouts to recipients in bulk via automated bank-transfer
+    disbursements from your Fazz Business account, billed in SGD.
+- aid: fazz:fazz-payment-methods-api
+  name: Fazz Payment Methods API
+  tags:
+  - Payment Methods
+  - Virtual Accounts
+  - PayNow
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.fazz.com/reference/accept-payment-methods
+  baseURL: https://www.xfers.io/api/v4
+  properties:
+  - url: https://docs.fazz.com/reference/accept-payment-methods
+    type: APIReference
+  - url: openapi/fazz-openapi.yml
+    type: OpenAPI
+  description: Create and manage reusable payment method objects (virtual bank
+    accounts, PayNow) that collect unlimited payments from your customers.
+- aid: fazz:fazz-indonesia-payments-api
+  name: Fazz Indonesia Payments API (v4-ID)
+  tags:
+  - Payments
+  - Disbursements
+  - Indonesia
+  - Virtual Accounts
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.fazz.com/v4-ID/docs/home
+  baseURL: https://www.xfers.io/api/v4
+  properties:
+  - url: https://docs.fazz.com/v4-ID/docs/home
+    type: Documentation
+  - url: https://docs.fazz.com/v4-ID/docs/disbursements
+    type: APIReference
+  description: Indonesia-market payments and disbursements (v4-ID) covering local
+    virtual accounts and bank transfers, billed in IDR. Shares the Fazz/Xfers v4
+    request patterns with region-specific methods and destinations.
+- aid: fazz:fazz-callbacks
+  name: Fazz Callbacks (Webhooks)
+  tags:
+  - Webhooks
+  - Callbacks
+  - Events
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.fazz.com/docs/callbacks
+  baseURL: https://www.xfers.io/api/v4
+  properties:
+  - url: https://docs.fazz.com/docs/callbacks
+    type: Documentation
+  description: HTTP POST webhook callbacks that notify your endpoint of payment and
+    disbursement status changes in JSON, verified against your account signing secret.
+common:
+- type: AgenticAccess
+  url: agentic-access/fazz-agentic-access.yml
+- type: TrustCenter
+  url: security/fazz-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/fazz-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/fazz-domain-security.yml
+- type: Authentication
+  url: authentication/fazz-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/xfers
+- type: LinkedIn
+  url: https://www.linkedin.com/company/fazz-financial
+- type: Website
+  url: https://fazz.com/
+- type: Documentation
+  url: https://docs.fazz.com/
+- type: Plans
+  url: plans/fazz-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/fazz-rate-limits.yml
+- type: FinOps
+  url: finops/fazz-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

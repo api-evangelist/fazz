@@ -1,0 +1,49 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Fazz
+providerId: fazz
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: false
+tags:
+- Fintech
+- Payments
+- Disbursements
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The Fazz Payments API documents that rate limiting is enforced on API
+  requests (a "Rate Limiting" resource is listed in the developer docs), but
+  specific per-endpoint request-per-minute thresholds are not published on
+  the public pages. Clients should handle throttling responses and retry with
+  backoff. Idempotency keys are supported to make write requests safely
+  retriable.
+notes: >-
+  Specific numeric limits are not published publicly; verify per-account
+  thresholds in the Fazz Business dashboard / with support during
+  reconciliation. HTTP 429 is the conventional throttling response.
+sources:
+- https://docs.fazz.com/docs/getting-started
+- https://docs.fazz.com/
+responseCodes:
+  throttled: 429
+limits:
+- name: API Requests
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Rate limiting is enforced per account; specific RPM thresholds are not published publicly.
+policies:
+- name: Idempotency
+  description: >-
+    Write requests support idempotency keys so retries do not create
+    duplicate payments or disbursements.
+- name: Backoff Strategy
+  description: >-
+    Clients should implement exponential backoff with jitter on 429 responses
+    and honor any Retry-After header.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

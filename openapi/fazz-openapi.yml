@@ -1,0 +1,384 @@
+# Provenance: modeled-from-docs (grounded=modeled-from-docs)
+# Source: https://docs.fazz.com/ (Singapore Payments API v4) and
+#         https://docs.fazz.com/reference/* — Fazz did not publish a
+#         downloadable OpenAPI/Swagger file, so this document was modeled
+#         by hand from the live developer reference (endpoints, methods,
+#         request/response fields) as documented on 2026-07-17.
+# Host: production https://www.xfers.io ; sandbox https://sandbox.xfers.io
+# Auth: HTTP Basic — API key as username, secret key as password
+#       (curl -u API_KEY:SECRET_KEY). Live keys start with `live_`,
+#       sandbox keys start with `test_`. HTTPS is required.
+openapi: 3.0.3
+info:
+  title: Fazz Payments API (Singapore v4)
+  description: >-
+    Fazz Business Payments API for accepting payments (Accept API) and
+    sending payouts (Send API) in Singapore. Fazz is the Southeast Asian
+    fintech formed from the 2021 merger of Indonesia's Payfazz and
+    Singapore's Xfers; the payment infrastructure is still served from the
+    xfers.io hosts. This document was modeled from the public developer
+    reference at https://docs.fazz.com/ — no first-party OpenAPI file is
+    published by Fazz.
+  version: 'v4'
+  contact:
+    name: Fazz Business Support
+    url: https://support-sg.fazz.com/
+  termsOfService: https://fazz.com/
+servers:
+  - url: https://www.xfers.io/api/v4
+    description: Production (Singapore)
+  - url: https://sandbox.xfers.io/api/v4
+    description: Sandbox
+security:
+  - basicAuth: []
+tags:
+  - name: Payments
+    description: Accept API — create and query payments (collections).
+  - name: Payment Methods
+    description: Create reusable payment method objects (PayNow, virtual bank account).
+  - name: Disbursements
+    description: Send API — disburse funds to recipients (payouts).
+paths:
+  /payments:
+    post:
+      operationId: createPayment
+      tags:
+        - Payments
+      summary: Create a payment
+      description: >-
+        Creates a payment to collect funds from a customer via a supported
+        local payment method (PayNow QR or virtual bank account). Returns
+        payment instructions such as a PayNow QR image or virtual account
+        number.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentRequest'
+      responses:
+        '201':
+          description: Payment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+    get:
+      operationId: listPayments
+      tags:
+        - Payments
+      summary: Get a list of payments
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+        - name: startingAfter
+          in: query
+          schema:
+            type: string
+        - name: endingBefore
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of payments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Payment'
+  /payments/{paymentId}:
+    get:
+      operationId: getPayment
+      tags:
+        - Payments
+      summary: Get a payment
+      parameters:
+        - name: paymentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+  /payment_methods/{type}:
+    post:
+      operationId: createPaymentMethod
+      tags:
+        - Payment Methods
+      summary: Create a payment method
+      description: >-
+        Creates a reusable payment method object of the given type.
+        `type` is one of `virtual_bank_accounts` or `paynow`.
+      parameters:
+        - name: type
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - virtual_bank_accounts
+              - paynow
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentMethodRequest'
+      responses:
+        '201':
+          description: Payment method created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethod'
+  /payment_methods/{paymentMethodId}/payments:
+    get:
+      operationId: listPaymentsForPaymentMethod
+      tags:
+        - Payment Methods
+      summary: Get a list of payments for a payment method
+      parameters:
+        - name: paymentMethodId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of payments for the payment method
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Payment'
+  /disbursements:
+    post:
+      operationId: createDisbursement
+      tags:
+        - Disbursements
+      summary: Create a disbursement
+      description: >-
+        Creates a disbursement that sends funds from your Fazz Business
+        account to an intended recipient via a bank transfer or supported
+        disbursement method.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDisbursementRequest'
+      responses:
+        '201':
+          description: Disbursement created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Disbursement'
+    get:
+      operationId: listDisbursements
+      tags:
+        - Disbursements
+      summary: Get a list of disbursements
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+        - name: startingAfter
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of disbursements
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Disbursement'
+  /disbursements/{disbursementId}:
+    get:
+      operationId: getDisbursement
+      tags:
+        - Disbursements
+      summary: Get a disbursement
+      parameters:
+        - name: disbursementId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Disbursement detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Disbursement'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic authentication. Provide your API key as the Basic auth
+        username and your secret key as the password
+        (base64(api_key:secret_key)). Live keys start with `live_`;
+        sandbox keys start with `test_`.
+  schemas:
+    CreatePaymentRequest:
+      type: object
+      required:
+        - amount
+        - referenceId
+        - paymentMethodType
+        - paymentMethodOptions
+        - expiredAt
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Transaction amount, up to 2 decimal places.
+        currency:
+          type: string
+          default: SGD
+          description: Currently only SGD is supported for the Singapore API.
+        referenceId:
+          type: string
+          description: Unique merchant-supplied identifier for the transaction.
+        paymentMethodType:
+          type: string
+          enum:
+            - paynow
+            - virtual_bank_account
+          description: >-
+            paynow (PayNow QR — Singapore's UEN-based instant transfer
+            scheme) or virtual_bank_account (unique VA number).
+        paymentMethodOptions:
+          type: object
+          description: Provider-specific options. Currently only `fazz` is supported.
+        expiredAt:
+          type: string
+          format: date-time
+          description: ISO 8601 expiry; valid range is 1 hour to 30 days.
+        description:
+          type: string
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        referenceId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        expiredAt:
+          type: string
+          format: date-time
+        fees:
+          type: number
+          format: float
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+        instructions:
+          type: object
+          description: >-
+            Method-specific instructions — e.g. a PayNow QR image payload
+            or virtual account number and destination bank.
+    CreatePaymentMethodRequest:
+      type: object
+      properties:
+        referenceId:
+          type: string
+        displayName:
+          type: string
+        paymentMethodOptions:
+          type: object
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+            - paynow
+            - virtual_bank_account
+        referenceId:
+          type: string
+        instructions:
+          type: object
+    CreateDisbursementRequest:
+      type: object
+      required:
+        - amount
+        - referenceId
+        - disbursementMethod
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Amount to be disbursed via the disbursement method.
+        currency:
+          type: string
+          default: SGD
+        referenceId:
+          type: string
+          description: Unique merchant-supplied identifier for the disbursement.
+        disbursementMethod:
+          type: object
+          description: >-
+            Destination details — e.g. bank code, account number and
+            account holder name for a bank transfer.
+        description:
+          type: string
+    Disbursement:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        referenceId:
+          type: string
+        disbursementMethod:
+          type: object
+        createdAt:
+          type: string
+          format: date-time
+        fees:
+          type: number
+          format: float

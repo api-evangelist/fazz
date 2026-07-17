@@ -1,0 +1,20 @@
+generated: '2026-07-17'
+method: documented
+source: https://docs.fazz.com/docs/authentication
+summary:
+  types:
+  - http
+schemes:
+- name: basic_auth
+  type: http
+  scheme: basic
+  sources:
+  - https://docs.fazz.com/docs/authentication
+  notes: >-
+    HTTP Basic authentication. Provide your API key as the Basic auth
+    username and your secret key as the password
+    (base64(api_key:secret_key)) in the Authorization header. Live keys
+    start with `live_`; sandbox keys start with `test_`. All requests must
+    be made over HTTPS. Keys are generated on the Developer Tools page of
+    the Fazz Business dashboard; the secret key is shown only once.
+  example: 'curl https://www.xfers.io/api/v4/payments -u API_KEY:SECRET_KEY'
