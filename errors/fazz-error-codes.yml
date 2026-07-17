@@ -1,0 +1,62 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.fazz.com/docs/handling-errors
+format: custom
+summary: >-
+  The Fazz Payments API returns standard HTTP status codes (2xx success, 4xx
+  client error, 5xx server error) plus a programmatic error code. Codes split
+  into generic API errors (numeric 001-006) and transaction errors (TXN*, and
+  the NM/FG/EL/MA payment-processing codes). This is the non-payments-card
+  sibling of a decline-code table: the transaction codes are the effective
+  decline reasons for bank-transfer / PayNow collections and disbursements.
+http_status_families:
+- family: 2xx
+  meaning: Success
+- family: 4xx
+  meaning: Client error - includes a programmatic error code
+- family: 5xx
+  meaning: Server error
+generic_errors:
+- code: '001'
+  title: Internal server error
+  meaning: Rare server-side issue; contact Fazz support.
+- code: '002'
+  title: Access denied
+  meaning: The API call did not authenticate successfully.
+- code: '003'
+  title: Feature not supported
+  meaning: Functionality unavailable for your locale/environment.
+- code: '004'
+  title: Record not found
+  meaning: The object you were looking for was not found.
+- code: '005'
+  title: Invalid parameters
+  meaning: Your request parameters are invalid.
+- code: '006'
+  title: Unknown error
+  meaning: Very rare; report to Fazz.
+transaction_errors:
+- code: TXN0001
+  title: Account insufficient funds
+  meaning: The account does not have enough funds.
+- code: TXN0002
+  title: Invalid transaction amount
+  meaning: Amount below minimum or above maximum limits.
+- code: TXN0003
+  title: Exceeds account transaction limit
+  meaning: Would breach the account transaction ceiling.
+- code: TXN0004
+  title: Exceeds account balance limit
+  meaning: Receiving account is past its account balance limits.
+- code: NM-001
+  title: Payer verification mismatch
+  meaning: A different individual sent the transaction.
+- code: FG-001
+  title: Transaction under investigation
+  meaning: The transaction is flagged for investigation.
+- code: EL-001
+  title: Amount exceeds limitations
+  meaning: Transaction amount exceeds a set limit.
+- code: MA-001
+  title: Bank account unverified
+  meaning: The bank account used lacks verification status.

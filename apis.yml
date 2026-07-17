@@ -132,6 +132,50 @@ common:
   url: rate-limits/fazz-rate-limits.yml
 - type: FinOps
   url: finops/fazz-finops.yml
+- type: Packages
+  url: packages/fazz-packages.yml
+- type: SDKs
+  url: packages/fazz-packages.yml
+- type: WellKnown
+  url: well-known/fazz-well-known.yml
+- type: LLMsTxt
+  url: llms/fazz-llms.txt
+- type: MCPServer
+  url: mcp/fazz-mcp.yml
+- type: Overlay
+  url: overlays/fazz-openapi-overlay.yaml
+- type: Conformance
+  url: conformance/fazz-conformance.yml
+- type: ErrorCatalog
+  url: errors/fazz-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/fazz-lifecycle.yml
+- type: Conventions
+  url: conventions/fazz-conventions.yml
+- type: Idempotency
+  url: conventions/fazz-conventions.yml
+- type: ChangeLog
+  url: changelog/fazz-changelog.yml
+- type: Sandbox
+  url: sandbox/fazz-sandbox.yml
+- type: DataModel
+  url: data-model/fazz-data-model.yml
+- type: Webhooks
+  url: asyncapi/fazz-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Postman
+  url: collections/fazz.postman_collection.json
+- type: DeveloperPortal
+  url: https://docs.fazz.com/
+- type: GettingStarted
+  url: https://docs.fazz.com/docs/getting-started
+- type: Support
+  url: https://support-sg.fazz.com/
+- type: TermsOfService
+  url: https://fazz.com/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://fazz.com/privacy-policy
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

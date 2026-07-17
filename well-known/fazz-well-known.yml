@@ -1,0 +1,33 @@
+generated: '2026-07-17'
+method: searched
+source: live HTTP probes of the Fazz/Xfers hosts on 2026-07-17
+notes: >-
+  No /.well-known/ discovery documents are published on any Fazz or Xfers host.
+  The API uses HTTP Basic auth (no OAuth/OIDC), so oauth-authorization-server
+  and openid-configuration are not expected. No security.txt is published
+  (see security/fazz-vulnerability-disclosure.yml). A machine-readable
+  llms.txt IS published on the docs host (see llms/fazz-llms.txt).
+hosts:
+- host: https://www.xfers.io
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+- host: https://fazz.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://docs.fazz.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /llms.txt
+    status: 200
+    file: ../llms/fazz-llms.txt
+  - path: /llms-full.txt
+    status: 404

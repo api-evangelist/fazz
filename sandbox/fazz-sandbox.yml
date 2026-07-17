@@ -1,0 +1,38 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  https://docs.fazz.com/docs/getting-started ;
+  https://docs.fazz.com/docs/authentication ;
+  https://support-sg.fazz.com/support/solutions/articles/157000366151-how-to-change-payment-status-in-sandbox-
+summary: >-
+  Fazz provides a Sandbox mode separate from Live mode. Sandbox and Live are
+  selected purely by which API key set you authenticate with (test vs live key).
+  There are no synthetic card numbers - collections are bank-transfer / PayNow
+  based, so testing is done by simulating payment/disbursement status transitions
+  from the Sandbox dashboard rather than by using magic PANs.
+key_modes:
+- mode: live
+  key_prefix: live_
+  host: https://www.xfers.io/api/v4
+- mode: sandbox
+  key_prefix: test_
+  host: https://sandbox.xfers.io/api/v4
+key_generation: >-
+  In the Fazz Business dashboard, toggle to Sandbox mode, open the Developer
+  Tools page and click "Generate Secret Key". The secret key is shown only once.
+  Live vs Sandbox behaviour is determined by the key set used.
+simulation:
+- name: Simulate payment status
+  how: >-
+    In the Sandbox dashboard, open the transaction page for the payment and use
+    the action toggle to change its status. Setting a payment's status to
+    "completed" reflects the amount in your Sandbox SGD Cash Account.
+  source: https://support-sg.fazz.com/support/solutions/articles/157000366151-how-to-change-payment-status-in-sandbox-
+- name: Simulate disbursement status
+  how: >-
+    Disbursement statuses (processing / completed / failed) are similarly
+    driven from the Sandbox dashboard transaction actions.
+notes: >-
+  No first-party published fixed test bank accounts or PayNow test numbers were
+  found; testing relies on dashboard-driven status simulation. Never invent test
+  values - use the Sandbox dashboard to drive status transitions.

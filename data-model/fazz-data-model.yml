@@ -1,0 +1,37 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/fazz-openapi.yml
+summary: >-
+  Entity-relationship graph derived from the OpenAPI schemas and id-reference
+  fields. Three core entities: Payment, PaymentMethod, Disbursement.
+entities:
+- name: Payment
+  operations: [createPayment, listPayments, getPayment]
+  key: id
+  reference_field: referenceId
+  fields: [id, status, amount, currency, referenceId, createdAt, expiredAt, fees, paymentMethod, instructions]
+- name: PaymentMethod
+  operations: [createPaymentMethod, listPaymentsForPaymentMethod]
+  key: id
+  reference_field: referenceId
+  types: [paynow, virtual_bank_account]
+  fields: [id, type, referenceId, instructions]
+- name: Disbursement
+  operations: [createDisbursement, listDisbursements, getDisbursement]
+  key: id
+  reference_field: referenceId
+  fields: [id, status, amount, currency, referenceId, disbursementMethod, createdAt, fees]
+relationships:
+- from: Payment
+  to: PaymentMethod
+  type: has_one
+  via: paymentMethod
+  detail: A Payment embeds/points to the PaymentMethod that collected it.
+- from: PaymentMethod
+  to: Payment
+  type: has_many
+  via: listPaymentsForPaymentMethod
+  detail: A reusable PaymentMethod can collect many Payments.
+notes: >-
+  Disbursement is standalone (no $ref to Payment/PaymentMethod). All entities
+  are addressable by both the Fazz-assigned id and the merchant referenceId.

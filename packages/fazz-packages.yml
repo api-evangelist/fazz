@@ -1,0 +1,50 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  Public registries (PyPI, Packagist) and the Fazz/Xfers GitHub organization
+  (https://github.com/xfers). Fazz publishes no SDK for the current v4 Payments
+  API in its developer docs; the first-party client libraries below date from
+  the Xfers era and are legacy/archived. A community Go SDK also exists.
+notes: >-
+  The four Xfers-org libraries are first-party (published by the FazzEngineering /
+  Xfers GitHub org) but target the legacy Xfers API, not the documented v4
+  Fazz Payments API, and are archived/abandoned. Treat as reference only; the
+  current recommendation from the docs is direct HTTPS + HTTP Basic auth.
+packages:
+- language: python
+  registry: pypi
+  name: xfers
+  url: https://pypi.org/project/xfers/
+  install: pip install xfers
+  official: true
+  status: unmaintained
+  version: 1.4.1
+  source_repo: https://github.com/Xfers/xfers-python
+  notes: Legacy Xfers Python bindings (last release 2017); archived.
+- language: php
+  registry: packagist
+  name: xfers/xfers-php
+  url: https://packagist.org/packages/xfers/xfers-php
+  install: composer require xfers/xfers-php
+  official: true
+  status: abandoned
+  version: 1.3.0
+  source_repo: https://github.com/Xfers/xfers-php
+  notes: Legacy Xfers PHP client; marked abandoned on Packagist.
+- language: java
+  registry: github
+  name: xfers-java
+  url: https://github.com/xfers/xfers-java
+  install: See repository README (not published to Maven Central).
+  official: true
+  status: legacy
+  source_repo: https://github.com/xfers/xfers-java
+  notes: Legacy Xfers Java client library from the Xfers GitHub org.
+- language: go
+  registry: github
+  name: abmid/fazz-sdk-go
+  url: https://github.com/abmid/fazz-sdk-go
+  install: go get github.com/abmid/fazz-sdk-go
+  official: false
+  status: community
+  notes: Community/unofficial Go SDK for the Fazz / Xfers API.

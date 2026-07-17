@@ -1,0 +1,49 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.fazz.com/changelog
+scheme: >-
+  Dated, region-prefixed changelog entries ([SG] for Singapore, [ID] for
+  Indonesia). API is versioned by URI path (v4) with regional variants
+  (v4-SG, v4-ID, v4-SGFAST).
+current_version: v4
+notes: >-
+  The live changelog at docs.fazz.com/changelog is the source of truth. Entries
+  observed are all additive/enhancement; no breaking changes were flagged in the
+  recent window. Rebrand note - the API was unified under Fazz but variables,
+  endpoints and responses may still reference Xfers.
+entries:
+- date: '2024-04-23'
+  region: ID
+  title: Introducing Disbursement to Virtual Account Destination Feature
+  type: addition
+  url: https://docs.fazz.com/changelog/id-2024-04-23-introducing-disbursement-to-virtual-account-destination-feature
+  highlights: Adds disbursements directed to virtual account destinations (Indonesia).
+- date: '2023-12-05'
+  region: SG
+  title: API Enhancements
+  type: addition
+  url: https://docs.fazz.com/changelog/sg-2023-12-05-api-enhancements
+  highlights: General Singapore API improvements, including payment response structure changes.
+- date: '2023-12-05'
+  region: ID
+  title: API Enhancements
+  type: addition
+  url: https://docs.fazz.com/changelog/2023-12-05-id-api-enhancements
+  highlights: General Indonesia API improvements.
+- date: '2023-10-13'
+  region: SG
+  title: Added Sender Information
+  type: addition
+  url: https://docs.fazz.com/changelog/2023-10-13-added-sender-information
+  highlights: New sender information fields added to the API.
+- date: '2023-06-01'
+  region: SG
+  title: Updated Disbursement Object
+  type: addition
+  url: https://docs.fazz.com/changelog/2023-06-01-updated-disbursement-object
+  highlights: Modifications to the disbursement object structure.
+- date: '2023-05-11'
+  region: SG
+  title: Added Rate Limit Section
+  type: documentation
+  highlights: Documentation of rate limiting guidelines added to the developer docs.

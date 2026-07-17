@@ -1,0 +1,33 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  https://docs.fazz.com/ ; https://docs.fazz.com/changelog ;
+  https://docs.fazz.com/docs/getting-started
+versioning:
+  scheme: uri-path
+  current: v4
+  variants: [v4-SG, v4-ID, v4-SGFAST]
+  docs: https://docs.fazz.com/
+  detail: >-
+    Versioned by URI path (/api/v4). Regional/product variants (v4-SG, v4-ID,
+    v4-SGFAST) share the v4 request patterns. Post-rebrand, some variables and
+    endpoints still reference Xfers.
+changelog:
+  present: true
+  url: https://docs.fazz.com/changelog
+  ref: changelog/fazz-changelog.yml
+deprecation:
+  policy_url: null
+  sunset_header: null
+  detail: >-
+    No published deprecation policy or RFC 8594 Sunset/Deprecation header
+    support was found. Changelog entries in the recent window are additive.
+sla:
+  url: null
+  uptime_target: null
+  detail: No public SLA or uptime commitment was located.
+status_page: null
+status_page_detail: >-
+  No public status page (status.fazz.com / status.xfers.io) was reachable or
+  discoverable as of the generated date.
+deprecated_operations: []

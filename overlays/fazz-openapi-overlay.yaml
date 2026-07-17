@@ -1,0 +1,23 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Fazz Payments API (Singapore v4)
+  version: 1.0.0
+extends: openapi/fazz-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enrichment:
+      idempotency: POST requests accept a referenceId idempotency key (docs/idempotent-requests)
+      pagination: page[size]/page[number] + sort + filter[] (docs/pagination-sorting-filtering)
+      webhooks: HMAC-SHA256 signed callbacks via X-Xfers-Signature (asyncapi/fazz-webhooks.yml)
+      error_catalog: errors/fazz-error-codes.yml
+      conventions: conventions/fazz-conventions.yml
+- target: $.paths['/payments'].get
+  update:
+    x-apievangelist-note: >-
+      Live docs paginate with page[size]/page[number] + sort + filter[] rather
+      than the limit/startingAfter/endingBefore shown here (modeled spec).
+- target: $.paths['/disbursements'].get
+  update:
+    x-apievangelist-note: >-
+      Live docs paginate with page[size]/page[number] + sort + filter[].

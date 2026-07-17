@@ -1,0 +1,26 @@
+# Fazz Payments API Documentation
+
+> Documentation for Fazz Payments API
+
+## Guides
+- [Singapore Payments API](https://docs.fazz.com/docs/home.md): Incorporate automated payments and payouts for your business in Singapore. If you operate in Indonesia, please view our **[Indonesia Payments API (v4-ID)](https://docs.fazz.com/v4-ID/docs)** docs instead.
+- [PayNow QR](https://docs.fazz.com/docs/paynow.md)
+- [Disbursement Destination Banks](https://docs.fazz.com/docs/disbursement-destination-banks.md)
+- [Callback Event Types](https://docs.fazz.com/docs/callback-event-types.md)
+
+## API Reference
+- [Create a payment](https://docs.fazz.com/reference/create-payment.md)
+- [Get a payment](https://docs.fazz.com/reference/get-a-payment.md)
+- [Get a list of payments](https://docs.fazz.com/reference/get-payments.md)
+- [Create a payment method](https://docs.fazz.com/reference/create-a-payment-method.md)
+- [Get a list of payments for a payment method](https://docs.fazz.com/reference/get-payment-method-payments.md): Returns a list of payments made to a specified payment method.
+- [Create a disbursement](https://docs.fazz.com/reference/create-disbursement.md): Creates a disbursement that will send funds from your account to an intended recipient.
+- [Get a disbursement](https://docs.fazz.com/reference/get-disbursement.md)
+- [Get a list of disbursements](https://docs.fazz.com/reference/get-disbursements.md)
+
+## Changelog
+- [[ID] 2024-04-23 Introducing Disbursement to Virtual Account Destination Feature](https://docs.fazz.com/changelog/id-2024-04-23-introducing-disbursement-to-virtual-account-destination-feature.md)
+- [[SG] 2023-12-05 API Enhancements](https://docs.fazz.com/changelog/sg-2023-12-05-api-enhancements.md)
+- [[ID] 2023-12-05 API Enhancements](https://docs.fazz.com/changelog/2023-12-05-id-api-enhancements.md)
+- [[SG] 2023-10-13 Added Sender Information](https://docs.fazz.com/changelog/2023-10-13-added-sender-information.md)
+- [[SG] 2023-06-01 Updated Disbursement Object](https://docs.fazz.com/changelog/2023-06-01-updated-disbursement-object.md)

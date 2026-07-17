@@ -1,0 +1,38 @@
+generated: '2026-07-17'
+method: derived
+status: candidate
+source: openapi/fazz-openapi.yml
+summary: >-
+  No official hosted/remote MCP server is published by Fazz for the Payments
+  API. (The Xfers org publishes a StraitsX MCP virtual-card demo, which is a
+  different product.) This is a candidate tool list derived one-to-one from the
+  documented v4 operations - a starting point for exposing Fazz to agents.
+server:
+  name: fazz
+  transport: http
+  url: null
+tools:
+- name: create_payment
+  description: Create a payment to collect funds via PayNow QR or a virtual bank account.
+  source_operation: openapi/fazz-openapi.yml#createPayment
+- name: list_payments
+  description: List payments.
+  source_operation: openapi/fazz-openapi.yml#listPayments
+- name: get_payment
+  description: Retrieve a payment by id.
+  source_operation: openapi/fazz-openapi.yml#getPayment
+- name: create_payment_method
+  description: Create a reusable payment method (paynow or virtual_bank_account).
+  source_operation: openapi/fazz-openapi.yml#createPaymentMethod
+- name: list_payments_for_payment_method
+  description: List payments collected by a given payment method.
+  source_operation: openapi/fazz-openapi.yml#listPaymentsForPaymentMethod
+- name: create_disbursement
+  description: Send a payout to a recipient via bank transfer.
+  source_operation: openapi/fazz-openapi.yml#createDisbursement
+- name: list_disbursements
+  description: List disbursements.
+  source_operation: openapi/fazz-openapi.yml#listDisbursements
+- name: get_disbursement
+  description: Retrieve a disbursement by id.
+  source_operation: openapi/fazz-openapi.yml#getDisbursement

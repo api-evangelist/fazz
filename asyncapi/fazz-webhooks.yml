@@ -1,0 +1,38 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  https://docs.fazz.com/docs/callbacks ;
+  https://docs.fazz.com/docs/callback-event-types ;
+  https://docs.fazz.com/docs/securing-your-callback
+spec_type: Webhooks
+summary: >-
+  Fazz notifies your endpoint of payment and disbursement status changes via
+  HTTP POST JSON callbacks ("Callbacks"). No first-party AsyncAPI document is
+  published; this is the webhook catalog captured from the developer docs.
+transport: HTTP POST (JSON body) to a merchant-configured callback URL
+signature:
+  algorithm: HMAC-SHA256
+  detail: >-
+    The callback signature is computed as HMAC-SHA256 over the raw request body
+    using your account Signing Secret (from the dashboard). Compare with a
+    constant-time comparison.
+  headers:
+  - X-Xfers-Signature
+  - Xfers-Signature   # older/Ruby example header casing for the same value
+  secret: account Signing Secret (Developer Tools page of the Fazz Business dashboard)
+events:
+- object: payment
+  detail: >-
+    Payment status updates. Payload carries "type": "payment" with a "status"
+    (e.g. "completed") and the payment method type ("virtual_bank_account" or
+    "paynow").
+  payment_method_types: [virtual_bank_account, paynow]
+- object: disbursement
+  detail: >-
+    Disbursement status updates. Payload carries "type": "disbursement" with a
+    "status" (e.g. "completed") and disbursement method type ("bank_transfer").
+  disbursement_method_types: [bank_transfer]
+notes: >-
+  The docs show sample callback payloads grouped by object/status rather than a
+  discrete dotted event-name registry (e.g. no "payment.completed" string). The
+  full event catalog lives at https://docs.fazz.com/docs/callback-event-types.

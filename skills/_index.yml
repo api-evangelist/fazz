@@ -1,0 +1,16 @@
+generated: '2026-07-17'
+method: generated
+source: openapi/fazz-openapi.yml + conventions/fazz-conventions.yml + errors/fazz-error-codes.yml
+skills:
+- file: fazz-accept-a-payment.md
+  name: Accept a payment with Fazz
+  api: openapi/fazz-openapi.yml
+  operations: [createPayment, getPayment, listPayments]
+- file: fazz-reusable-payment-method.md
+  name: Create a reusable Fazz payment method
+  api: openapi/fazz-openapi.yml
+  operations: [createPaymentMethod, listPaymentsForPaymentMethod]
+- file: fazz-send-a-disbursement.md
+  name: Send a disbursement with Fazz
+  api: openapi/fazz-openapi.yml
+  operations: [createDisbursement, getDisbursement, listDisbursements]

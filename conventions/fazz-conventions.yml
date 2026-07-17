@@ -1,0 +1,85 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  https://docs.fazz.com/docs/getting-started ;
+  https://docs.fazz.com/docs/authentication ;
+  https://docs.fazz.com/docs/idempotent-requests ;
+  https://docs.fazz.com/docs/pagination-sorting-filtering ;
+  https://docs.fazz.com/docs/handling-errors ;
+  https://docs.fazz.com/docs/callbacks
+summary: >-
+  Cross-cutting request/response conventions for the Fazz Business Payments API
+  (Singapore v4, served on the xfers.io hosts). Grounded in the live developer
+  docs; cross-links errors/, authentication/, lifecycle/, rate-limits/ and
+  asyncapi/ (callbacks).
+authentication:
+  style: HTTP Basic
+  detail: >-
+    API key as Basic auth username, secret key as password
+    (base64(api_key:secret_key)) in the Authorization header. Live keys start
+    with `live_`, sandbox keys with `test_`. HTTPS required.
+  ref: authentication/fazz-authentication.yml
+idempotency:
+  supported: true
+  mechanism: reference-id
+  detail: >-
+    All POST (write) requests accept a client-supplied `referenceId` that acts
+    as the idempotency key, allowing safe retries without creating duplicate
+    payments or disbursements. Fazz recommends a random token or a unique
+    business reference id per operation.
+  key_field: referenceId
+  header: null
+  docs: https://docs.fazz.com/docs/idempotent-requests
+  retention: not published
+  scope: not published (per-account assumed)
+pagination:
+  style: page-based
+  params:
+    page_size: page[size]
+    page_number: page[number]
+  defaults:
+    page_size_default: 10
+    page_size_max: 1000
+  sorting:
+    param: sort
+    detail: Comma-free single field; ascending by default, prefix with `-` for descending (e.g. sort=-createdAt).
+  filtering:
+    param_style: filter[fieldName]
+    fields:
+    - filter[createdAfter]   # ISO8601 timestamp
+    - filter[createdBefore]  # ISO8601 timestamp
+    - filter[status]         # disbursements: processing|completed|failed ; payments: paid|completed
+    - filter[referenceId]    # string
+  response_fields:
+    data: array of objects
+  docs: https://docs.fazz.com/docs/pagination-sorting-filtering
+  note: >-
+    The repo OpenAPI (modeled) shows limit/startingAfter/endingBefore list
+    params; the live docs use page[size]/page[number] + sort + filter[]. This
+    conventions doc reflects the documented behaviour.
+versioning:
+  scheme: uri-path
+  current: v4
+  variants: [v4-SG, v4-ID, v4-SGFAST]
+  detail: Regional variants share the v4 request patterns; region is selected by the base documentation set / product.
+  ref: lifecycle/fazz-lifecycle.yml
+error_envelope:
+  detail: >-
+    Standard HTTP status codes (2xx success, 4xx client, 5xx server). Errors
+    carry programmatic codes - generic codes (001-006) and transaction codes
+    (TXN0001-TXN0004, NM-001, FG-001, EL-001, MA-001). Not RFC 9457
+    problem+json.
+  format: custom
+  ref: errors/fazz-error-codes.yml
+  docs: https://docs.fazz.com/docs/handling-errors
+rate_limiting:
+  signaled_via: HTTP 429
+  detail: Rate limiting enforced per account; specific RPM thresholds are not published. Honor Retry-After and back off.
+  ref: rate-limits/fazz-rate-limits.yml
+webhooks:
+  detail: >-
+    HTTP POST JSON callbacks for payment and disbursement status changes,
+    signed with HMAC-SHA256 over the raw body using your account Signing Secret;
+    signature carried in the `X-Xfers-Signature` header.
+  ref: asyncapi/fazz-webhooks.yml
+  docs: https://docs.fazz.com/docs/callbacks
