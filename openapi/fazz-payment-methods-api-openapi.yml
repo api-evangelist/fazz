@@ -1,0 +1,131 @@
+openapi: 3.0.3
+info:
+  title: Fazz Payments API (Singapore v4) Disbursements Payment Methods API
+  description: Fazz Business Payments API for accepting payments (Accept API) and sending payouts (Send API) in Singapore. Fazz is the Southeast Asian fintech formed from the 2021 merger of Indonesia's Payfazz and Singapore's Xfers; the payment infrastructure is still served from the xfers.io hosts. This document was modeled from the public developer reference at https://docs.fazz.com/ — no first-party OpenAPI file is published by Fazz.
+  version: v4
+  contact:
+    name: Fazz Business Support
+    url: https://support-sg.fazz.com/
+  termsOfService: https://fazz.com/
+servers:
+- url: https://www.xfers.io/api/v4
+  description: Production (Singapore)
+- url: https://sandbox.xfers.io/api/v4
+  description: Sandbox
+security:
+- basicAuth: []
+tags:
+- name: Payment Methods
+  description: Create reusable payment method objects (PayNow, virtual bank account).
+paths:
+  /payment_methods/{type}:
+    post:
+      operationId: createPaymentMethod
+      tags:
+      - Payment Methods
+      summary: Create a payment method
+      description: Creates a reusable payment method object of the given type. `type` is one of `virtual_bank_accounts` or `paynow`.
+      parameters:
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - virtual_bank_accounts
+          - paynow
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentMethodRequest'
+      responses:
+        '201':
+          description: Payment method created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethod'
+  /payment_methods/{paymentMethodId}/payments:
+    get:
+      operationId: listPaymentsForPaymentMethod
+      tags:
+      - Payment Methods
+      summary: Get a list of payments for a payment method
+      parameters:
+      - name: paymentMethodId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of payments for the payment method
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Payment'
+components:
+  schemas:
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        referenceId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        expiredAt:
+          type: string
+          format: date-time
+        fees:
+          type: number
+          format: float
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+        instructions:
+          type: object
+          description: Method-specific instructions — e.g. a PayNow QR image payload or virtual account number and destination bank.
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - paynow
+          - virtual_bank_account
+        referenceId:
+          type: string
+        instructions:
+          type: object
+    CreatePaymentMethodRequest:
+      type: object
+      properties:
+        referenceId:
+          type: string
+        displayName:
+          type: string
+        paymentMethodOptions:
+          type: object
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. Provide your API key as the Basic auth username and your secret key as the password (base64(api_key:secret_key)). Live keys start with `live_`; sandbox keys start with `test_`.

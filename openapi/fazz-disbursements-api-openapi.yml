@@ -1,0 +1,136 @@
+openapi: 3.0.3
+info:
+  title: Fazz Payments API (Singapore v4) Disbursements API
+  description: Fazz Business Payments API for accepting payments (Accept API) and sending payouts (Send API) in Singapore. Fazz is the Southeast Asian fintech formed from the 2021 merger of Indonesia's Payfazz and Singapore's Xfers; the payment infrastructure is still served from the xfers.io hosts. This document was modeled from the public developer reference at https://docs.fazz.com/ — no first-party OpenAPI file is published by Fazz.
+  version: v4
+  contact:
+    name: Fazz Business Support
+    url: https://support-sg.fazz.com/
+  termsOfService: https://fazz.com/
+servers:
+- url: https://www.xfers.io/api/v4
+  description: Production (Singapore)
+- url: https://sandbox.xfers.io/api/v4
+  description: Sandbox
+security:
+- basicAuth: []
+tags:
+- name: Disbursements
+  description: Send API — disburse funds to recipients (payouts).
+paths:
+  /disbursements:
+    post:
+      operationId: createDisbursement
+      tags:
+      - Disbursements
+      summary: Create a disbursement
+      description: Creates a disbursement that sends funds from your Fazz Business account to an intended recipient via a bank transfer or supported disbursement method.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDisbursementRequest'
+      responses:
+        '201':
+          description: Disbursement created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Disbursement'
+    get:
+      operationId: listDisbursements
+      tags:
+      - Disbursements
+      summary: Get a list of disbursements
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+      - name: startingAfter
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of disbursements
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Disbursement'
+  /disbursements/{disbursementId}:
+    get:
+      operationId: getDisbursement
+      tags:
+      - Disbursements
+      summary: Get a disbursement
+      parameters:
+      - name: disbursementId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Disbursement detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Disbursement'
+components:
+  schemas:
+    Disbursement:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        referenceId:
+          type: string
+        disbursementMethod:
+          type: object
+        createdAt:
+          type: string
+          format: date-time
+        fees:
+          type: number
+          format: float
+    CreateDisbursementRequest:
+      type: object
+      required:
+      - amount
+      - referenceId
+      - disbursementMethod
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Amount to be disbursed via the disbursement method.
+        currency:
+          type: string
+          default: SGD
+        referenceId:
+          type: string
+          description: Unique merchant-supplied identifier for the disbursement.
+        disbursementMethod:
+          type: object
+          description: Destination details — e.g. bank code, account number and account holder name for a bank transfer.
+        description:
+          type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. Provide your API key as the Basic auth username and your secret key as the password (base64(api_key:secret_key)). Live keys start with `live_`; sandbox keys start with `test_`.

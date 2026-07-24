@@ -1,0 +1,173 @@
+openapi: 3.0.3
+info:
+  title: Fazz API (Singapore v4) Disbursements Payments API
+  description: Fazz Business Payments API for accepting payments (Accept API) and sending payouts (Send API) in Singapore. Fazz is the Southeast Asian fintech formed from the 2021 merger of Indonesia's Payfazz and Singapore's Xfers; the payment infrastructure is still served from the xfers.io hosts. This document was modeled from the public developer reference at https://docs.fazz.com/ — no first-party OpenAPI file is published by Fazz.
+  version: v4
+  contact:
+    name: Fazz Business Support
+    url: https://support-sg.fazz.com/
+  termsOfService: https://fazz.com/
+servers:
+- url: https://www.xfers.io/api/v4
+  description: Production (Singapore)
+- url: https://sandbox.xfers.io/api/v4
+  description: Sandbox
+security:
+- basicAuth: []
+tags:
+- name: Payments
+  description: Accept API — create and query payments (collections).
+paths:
+  /payments:
+    post:
+      operationId: createPayment
+      tags:
+      - Payments
+      summary: Create a payment
+      description: Creates a payment to collect funds from a customer via a supported local payment method (PayNow QR or virtual bank account). Returns payment instructions such as a PayNow QR image or virtual account number.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentRequest'
+      responses:
+        '201':
+          description: Payment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+    get:
+      operationId: listPayments
+      tags:
+      - Payments
+      summary: Get a list of payments
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+      - name: startingAfter
+        in: query
+        schema:
+          type: string
+      - name: endingBefore
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of payments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Payment'
+  /payments/{paymentId}:
+    get:
+      operationId: getPayment
+      tags:
+      - Payments
+      summary: Get a payment
+      parameters:
+      - name: paymentId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Payment detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+components:
+  schemas:
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        referenceId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        expiredAt:
+          type: string
+          format: date-time
+        fees:
+          type: number
+          format: float
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+        instructions:
+          type: object
+          description: Method-specific instructions — e.g. a PayNow QR image payload or virtual account number and destination bank.
+    CreatePaymentRequest:
+      type: object
+      required:
+      - amount
+      - referenceId
+      - paymentMethodType
+      - paymentMethodOptions
+      - expiredAt
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Transaction amount, up to 2 decimal places.
+        currency:
+          type: string
+          default: SGD
+          description: Currently only SGD is supported for the Singapore API.
+        referenceId:
+          type: string
+          description: Unique merchant-supplied identifier for the transaction.
+        paymentMethodType:
+          type: string
+          enum:
+          - paynow
+          - virtual_bank_account
+          description: paynow (PayNow QR — Singapore's UEN-based instant transfer scheme) or virtual_bank_account (unique VA number).
+        paymentMethodOptions:
+          type: object
+          description: Provider-specific options. Currently only `fazz` is supported.
+        expiredAt:
+          type: string
+          format: date-time
+          description: ISO 8601 expiry; valid range is 1 hour to 30 days.
+        description:
+          type: string
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - paynow
+          - virtual_bank_account
+        referenceId:
+          type: string
+        instructions:
+          type: object
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. Provide your API key as the Basic auth username and your secret key as the password (base64(api_key:secret_key)). Live keys start with `live_`; sandbox keys start with `test_`.
