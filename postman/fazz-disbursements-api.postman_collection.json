@@ -1,0 +1,333 @@
+{
+  "info": {
+    "_postman_id": "43da0b00-3f91-4869-8dda-b463151f81f1",
+    "name": "Fazz Payments API (Singapore v4) Disbursements API",
+    "description": "Fazz Business Payments API for accepting payments (Accept API) and sending payouts (Send API) in Singapore. Fazz is the Southeast Asian fintech formed from the 2021 merger of Indonesia's Payfazz and Singapore's Xfers; the payment infrastructure is still served from the xfers.io hosts. This document was modeled from the public developer reference at https://docs.fazz.com/ \u2014 no first-party OpenAPI file is published by Fazz.\n\nContact Support:\n Name: Fazz Business Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:36:55.000Z",
+    "updatedAt": "2026-07-28T01:36:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-43da0b00-3f91-4869-8dda-b463151f81f1"
+  },
+  "item": [
+    {
+      "name": "disbursements",
+      "item": [
+        {
+          "name": "{disbursementId}",
+          "item": [
+            {
+              "name": "Get a disbursement",
+              "id": "1ee71184-0cc1-4ca0-9a97-eee171b58b55",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/disbursements/:disbursementId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "disbursements",
+                    ":disbursementId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "625f2033-8864-4c64-b1cb-114aaf5fa99d",
+                      "key": "disbursementId",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "c3b07ed0-2c5c-4b2d-878b-15695bf4048b",
+                  "name": "Disbursement detail",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/disbursements/:disbursementId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "disbursements",
+                        ":disbursementId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "disbursementId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"amount\": \"<float>\",\n  \"currency\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"disbursementMethod\": {},\n  \"createdAt\": \"<dateTime>\",\n  \"fees\": \"<float>\"\n}",
+                  "createdAt": "2026-07-28T01:36:56.000Z",
+                  "updatedAt": "2026-07-28T01:36:56.000Z",
+                  "uid": "35240-c3b07ed0-2c5c-4b2d-878b-15695bf4048b"
+                }
+              ],
+              "createdAt": "2026-07-28T01:36:56.000Z",
+              "updatedAt": "2026-07-28T01:36:56.000Z",
+              "uid": "35240-1ee71184-0cc1-4ca0-9a97-eee171b58b55"
+            }
+          ],
+          "id": "39f1de75-2ebf-497e-a83c-1974bc5e4644",
+          "createdAt": "2026-07-28T01:36:56.000Z",
+          "updatedAt": "2026-07-28T01:36:56.000Z",
+          "uid": "35240-39f1de75-2ebf-497e-a83c-1974bc5e4644"
+        },
+        {
+          "name": "Create a disbursement",
+          "id": "37d13243-eff1-4220-b20b-bd0a0cd6a21d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<float>\",\n  \"referenceId\": \"<string>\",\n  \"disbursementMethod\": {},\n  \"currency\": \"SGD\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/disbursements",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "disbursements"
+              ]
+            },
+            "description": "Creates a disbursement that sends funds from your Fazz Business account to an intended recipient via a bank transfer or supported disbursement method."
+          },
+          "response": [
+            {
+              "id": "b561b17e-fab3-4567-94d1-cc25ed8012db",
+              "name": "Disbursement created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<float>\",\n  \"referenceId\": \"<string>\",\n  \"disbursementMethod\": {},\n  \"currency\": \"SGD\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/disbursements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "disbursements"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"amount\": \"<float>\",\n  \"currency\": \"<string>\",\n  \"referenceId\": \"<string>\",\n  \"disbursementMethod\": {},\n  \"createdAt\": \"<dateTime>\",\n  \"fees\": \"<float>\"\n}",
+              "createdAt": "2026-07-28T01:36:56.000Z",
+              "updatedAt": "2026-07-28T01:36:56.000Z",
+              "uid": "35240-b561b17e-fab3-4567-94d1-cc25ed8012db"
+            }
+          ],
+          "createdAt": "2026-07-28T01:36:56.000Z",
+          "updatedAt": "2026-07-28T01:36:56.000Z",
+          "uid": "35240-37d13243-eff1-4220-b20b-bd0a0cd6a21d"
+        },
+        {
+          "name": "Get a list of disbursements",
+          "id": "1f78bb45-47e4-48f4-b21a-8ea7cec6de0d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/disbursements?limit=<integer>&startingAfter=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "disbursements"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "startingAfter",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "78c1bcaa-67c0-4775-b8ef-ff44ba09c61e",
+              "name": "A list of disbursements",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/disbursements?limit=<integer>&startingAfter=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "disbursements"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startingAfter",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"currency\": \"<string>\",\n      \"referenceId\": \"<string>\",\n      \"disbursementMethod\": {},\n      \"createdAt\": \"<dateTime>\",\n      \"fees\": \"<float>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"currency\": \"<string>\",\n      \"referenceId\": \"<string>\",\n      \"disbursementMethod\": {},\n      \"createdAt\": \"<dateTime>\",\n      \"fees\": \"<float>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:36:56.000Z",
+              "updatedAt": "2026-07-28T01:36:56.000Z",
+              "uid": "35240-78c1bcaa-67c0-4775-b8ef-ff44ba09c61e"
+            }
+          ],
+          "createdAt": "2026-07-28T01:36:56.000Z",
+          "updatedAt": "2026-07-28T01:36:56.000Z",
+          "uid": "35240-1f78bb45-47e4-48f4-b21a-8ea7cec6de0d"
+        }
+      ],
+      "id": "c812009e-b6b9-4c2b-96b1-231baecb075b",
+      "createdAt": "2026-07-28T01:36:56.000Z",
+      "updatedAt": "2026-07-28T01:36:56.000Z",
+      "uid": "35240-c812009e-b6b9-4c2b-96b1-231baecb075b"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.xfers.io/api/v4"
+    }
+  ]
+}

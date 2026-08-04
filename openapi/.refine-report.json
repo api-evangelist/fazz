@@ -1,0 +1,18 @@
+{
+  "provider": "fazz",
+  "sources": [
+    "fazz-disbursements-api-openapi.yml",
+    "fazz-payment-methods-api-openapi.yml",
+    "fazz-payments-api-openapi.yml"
+  ],
+  "outputs": [
+    "fazz-disbursements-api-openapi.yml",
+    "fazz-payment-methods-api-openapi.yml",
+    "fazz-payments-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
