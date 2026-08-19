@@ -1,0 +1,65 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fazz Payments API (Singapore v4) Disbursements Payment Methods API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Methods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.xfers.io/api/v4/payment_methods/:type",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a reusable payment method object of the given type. `type` is one of `virtual_bank_accounts` or `paynow`."
+        },
+        {
+          "info": {
+            "name": "Get a list of payments for a payment method",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.xfers.io/api/v4/payment_methods/:paymentMethodId/payments",
+            "params": [
+              {
+                "name": "paymentMethodId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a list of payments for a payment method"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

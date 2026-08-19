@@ -1,0 +1,341 @@
+{
+  "item": [
+    {
+      "id": "7f12498f-fe32-425d-8643-774d2845be54",
+      "name": "Payments",
+      "description": {
+        "content": "Accept API — create and query payments (collections).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d456e1ea-f369-4a5c-8612-9061eca62c26",
+          "name": "Create a payment",
+          "request": {
+            "name": "Create a payment",
+            "description": {
+              "content": "Creates a payment to collect funds from a customer via a supported local payment method (PayNow QR or virtual bank account). Returns payment instructions such as a PayNow QR image or virtual account number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<float>\",\n  \"referenceId\": \"<string>\",\n  \"paymentMethodType\": \"<string>\",\n  \"paymentMethodOptions\": \"<object>\",\n  \"expiredAt\": \"<dateTime>\",\n  \"currency\": \"SGD\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "82a6545d-254c-4884-b698-78c26a10e754",
+              "name": "Payment created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<float>\",\n  \"referenceId\": \"<string>\",\n  \"paymentMethodType\": \"<string>\",\n  \"paymentMethodOptions\": \"<object>\",\n  \"expiredAt\": \"<dateTime>\",\n  \"currency\": \"SGD\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"amount\": 3150.274416312021,\n  \"currency\": \"string\",\n  \"referenceId\": \"string\",\n  \"createdAt\": \"1990-05-02T14:57:04.918Z\",\n  \"expiredAt\": \"2000-09-12T18:19:28.358Z\",\n  \"fees\": 3474.718630839859,\n  \"paymentMethod\": {\n    \"id\": \"string\",\n    \"type\": \"virtual_bank_account\",\n    \"referenceId\": \"string\",\n    \"instructions\": {}\n  },\n  \"instructions\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e5bf82a-7f4f-4cb7-9fd4-e5dc10fc5744",
+          "name": "Get a list of payments",
+          "request": {
+            "name": "Get a list of payments",
+            "description": {},
+            "url": {
+              "path": [
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "startingAfter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endingBefore",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6228c3e-42f7-472f-ac59-f42f74e071be",
+              "name": "A list of payments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startingAfter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endingBefore",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"amount\": 4736.5414036253815,\n      \"currency\": \"string\",\n      \"referenceId\": \"string\",\n      \"createdAt\": \"2000-04-17T15:40:03.116Z\",\n      \"expiredAt\": \"1980-08-08T06:38:41.656Z\",\n      \"fees\": 6559.451405081272,\n      \"paymentMethod\": {\n        \"id\": \"string\",\n        \"type\": \"virtual_bank_account\",\n        \"referenceId\": \"string\",\n        \"instructions\": {}\n      },\n      \"instructions\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"string\",\n      \"amount\": 7322.511390063241,\n      \"currency\": \"string\",\n      \"referenceId\": \"string\",\n      \"createdAt\": \"2001-04-18T05:29:05.460Z\",\n      \"expiredAt\": \"1949-12-28T12:51:00.537Z\",\n      \"fees\": 4769.885603558652,\n      \"paymentMethod\": {\n        \"id\": \"string\",\n        \"type\": \"virtual_bank_account\",\n        \"referenceId\": \"string\",\n        \"instructions\": {}\n      },\n      \"instructions\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a20b14c-d75c-40b2-8ae2-170ee1cdb99c",
+          "name": "Get a payment",
+          "request": {
+            "name": "Get a payment",
+            "description": {},
+            "url": {
+              "path": [
+                "payments",
+                ":paymentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "paymentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "917ae5c7-6a03-4722-8046-f69d1d82a733",
+              "name": "Payment detail",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":paymentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "paymentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"amount\": 3150.274416312021,\n  \"currency\": \"string\",\n  \"referenceId\": \"string\",\n  \"createdAt\": \"1990-05-02T14:57:04.918Z\",\n  \"expiredAt\": \"2000-09-12T18:19:28.358Z\",\n  \"fees\": 3474.718630839859,\n  \"paymentMethod\": {\n    \"id\": \"string\",\n    \"type\": \"virtual_bank_account\",\n    \"referenceId\": \"string\",\n    \"instructions\": {}\n  },\n  \"instructions\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.xfers.io/api/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7e07741a-8d34-419d-87ad-dd9e2122808a",
+    "name": "Fazz API (Singapore v4) Disbursements Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Fazz Business Payments API for accepting payments (Accept API) and sending payouts (Send API) in Singapore. Fazz is the Southeast Asian fintech formed from the 2021 merger of Indonesia's Payfazz and Singapore's Xfers; the payment infrastructure is still served from the xfers.io hosts. This document was modeled from the public developer reference at https://docs.fazz.com/ — no first-party OpenAPI file is published by Fazz.\n\nContact Support:\n Name: Fazz Business Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -2,11 +2,9 @@ generated: '2026-07-17'
 method: derived
 status: candidate
 source: openapi/fazz-openapi.yml
-summary: >-
-  No official hosted/remote MCP server is published by Fazz for the Payments
-  API. (The Xfers org publishes a StraitsX MCP virtual-card demo, which is a
-  different product.) This is a candidate tool list derived one-to-one from the
-  documented v4 operations - a starting point for exposing Fazz to agents.
+summary: No official hosted/remote MCP server is published by Fazz for the Payments API. (The Xfers org
+  publishes a StraitsX MCP virtual-card demo, which is a different product.) This is a candidate tool
+  list derived one-to-one from the documented v4 operations - a starting point for exposing Fazz to agents.
 server:
   name: fazz
   transport: http
@@ -36,3 +34,9 @@ tools:
 - name: get_disbursement
   description: Retrieve a disbursement by id.
   source_operation: openapi/fazz-openapi.yml#getDisbursement
+deployment:
+  mode: none
+  verified: derived
+  tools: 8
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Fazz Payments API (Singapore v4) Disbursements API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Disbursements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of disbursements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.xfers.io/api/v4/disbursements",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startingAfter",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get a list of disbursements"
+        },
+        {
+          "info": {
+            "name": "Create a disbursement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.xfers.io/api/v4/disbursements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a disbursement that sends funds from your Fazz Business account to an intended recipient via a bank transfer or supported disbursement method."
+        },
+        {
+          "info": {
+            "name": "Get a disbursement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.xfers.io/api/v4/disbursements/:disbursementId",
+            "params": [
+              {
+                "name": "disbursementId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a disbursement"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
