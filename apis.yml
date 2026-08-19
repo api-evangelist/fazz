@@ -32,7 +32,7 @@ tags:
 - Virtual Accounts
 created: '2026-07-17'
 modified: '2026-07-17'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: fazz:fazz-indonesia-payments-api
   name: Fazz Indonesia Payments API (v4-ID)
