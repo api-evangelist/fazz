@@ -55,6 +55,10 @@ apis:
 - aid: fazz:fazz-callbacks
   name: Fazz Callbacks (Webhooks)
   tags:
+  - Webhook
+  - Callbacks
+  - Event
+  tags_raw:
   - Webhooks
   - Callbacks
   - Events
