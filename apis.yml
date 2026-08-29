@@ -8,6 +8,18 @@ description: Fazz is a Southeast Asian business banking and payments group forme
   methods like PayNow QR and virtual bank accounts, and send bulk disbursements
   across Singapore (SGD) and Indonesia (IDR). Not to be confused with the consumer-facing
   Payfazz agent app.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
