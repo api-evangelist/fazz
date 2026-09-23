@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Fazz Payments API (Singapore v4) Disbursements API
   description: Fazz Business Payments API for accepting payments (Accept API) and sending payouts (Send API) in Singapore. Fazz is the Southeast Asian fintech formed from the 2021 merger of Indonesia's Payfazz and Singapore's Xfers; the payment infrastructure is still served from the xfers.io hosts. This document was modeled from the public developer reference at https://docs.fazz.com/ — no first-party OpenAPI file is published by Fazz.
@@ -85,28 +85,6 @@ paths:
                 $ref: '#/components/schemas/Disbursement'
 components:
   schemas:
-    Disbursement:
-      type: object
-      properties:
-        id:
-          type: string
-        status:
-          type: string
-        amount:
-          type: number
-          format: float
-        currency:
-          type: string
-        referenceId:
-          type: string
-        disbursementMethod:
-          type: object
-        createdAt:
-          type: string
-          format: date-time
-        fees:
-          type: number
-          format: float
     CreateDisbursementRequest:
       type: object
       required:
@@ -129,6 +107,28 @@ components:
           description: Destination details — e.g. bank code, account number and account holder name for a bank transfer.
         description:
           type: string
+    Disbursement:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        referenceId:
+          type: string
+        disbursementMethod:
+          type: object
+        createdAt:
+          type: string
+          format: date-time
+        fees:
+          type: number
+          format: float
   securitySchemes:
     basicAuth:
       type: http

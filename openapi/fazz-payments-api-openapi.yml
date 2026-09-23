@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Fazz API (Singapore v4) Disbursements Payments API
+  title: Fazz API (Singapore v4) Payments API
   description: Fazz Business Payments API for accepting payments (Accept API) and sending payouts (Send API) in Singapore. Fazz is the Southeast Asian fintech formed from the 2021 merger of Indonesia's Payfazz and Singapore's Xfers; the payment infrastructure is still served from the xfers.io hosts. This document was modeled from the public developer reference at https://docs.fazz.com/ — no first-party OpenAPI file is published by Fazz.
   version: v4
   contact:
@@ -89,34 +89,6 @@ paths:
                 $ref: '#/components/schemas/Payment'
 components:
   schemas:
-    Payment:
-      type: object
-      properties:
-        id:
-          type: string
-        status:
-          type: string
-        amount:
-          type: number
-          format: float
-        currency:
-          type: string
-        referenceId:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        expiredAt:
-          type: string
-          format: date-time
-        fees:
-          type: number
-          format: float
-        paymentMethod:
-          $ref: '#/components/schemas/PaymentMethod'
-        instructions:
-          type: object
-          description: Method-specific instructions — e.g. a PayNow QR image payload or virtual account number and destination bank.
     CreatePaymentRequest:
       type: object
       required:
@@ -152,6 +124,34 @@ components:
           description: ISO 8601 expiry; valid range is 1 hour to 30 days.
         description:
           type: string
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        referenceId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        expiredAt:
+          type: string
+          format: date-time
+        fees:
+          type: number
+          format: float
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod'
+        instructions:
+          type: object
+          description: Method-specific instructions — e.g. a PayNow QR image payload or virtual account number and destination bank.
     PaymentMethod:
       type: object
       properties:
