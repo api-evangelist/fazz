@@ -73,15 +73,6 @@ paths:
                       $ref: '#/components/schemas/Payment'
 components:
   schemas:
-    CreatePaymentMethodRequest:
-      type: object
-      properties:
-        referenceId:
-          type: string
-        displayName:
-          type: string
-        paymentMethodOptions:
-          type: object
     Payment:
       type: object
       properties:
@@ -123,6 +114,15 @@ components:
         referenceId:
           type: string
         instructions:
+          type: object
+    CreatePaymentMethodRequest:
+      type: object
+      properties:
+        referenceId:
+          type: string
+        displayName:
+          type: string
+        paymentMethodOptions:
           type: object
   securitySchemes:
     basicAuth:
