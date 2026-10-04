@@ -34,6 +34,9 @@ accessModel:
   generated: '2026-07-22'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fazz.png
+x-docs-platform: readme
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-10-03
 tags:
 - Fintech
 - Payments
@@ -138,6 +141,9 @@ apis:
   - type: APIReference
     url: https://docs.fazz.com/reference/accept-payment-methods
 common:
+- type: CapabilityMap
+  url: capabilities/fazz-capability-edges.yml
+  name: Fazz Business Capability Map
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/fazz/overview
 - type: AgenticAccess
