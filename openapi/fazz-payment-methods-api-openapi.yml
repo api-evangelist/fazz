@@ -73,6 +73,29 @@ paths:
                       $ref: '#/components/schemas/Payment'
 components:
   schemas:
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - paynow
+          - virtual_bank_account
+        referenceId:
+          type: string
+        instructions:
+          type: object
+    CreatePaymentMethodRequest:
+      type: object
+      properties:
+        referenceId:
+          type: string
+        displayName:
+          type: string
+        paymentMethodOptions:
+          type: object
     Payment:
       type: object
       properties:
@@ -101,29 +124,6 @@ components:
         instructions:
           type: object
           description: Method-specific instructions — e.g. a PayNow QR image payload or virtual account number and destination bank.
-    PaymentMethod:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          enum:
-          - paynow
-          - virtual_bank_account
-        referenceId:
-          type: string
-        instructions:
-          type: object
-    CreatePaymentMethodRequest:
-      type: object
-      properties:
-        referenceId:
-          type: string
-        displayName:
-          type: string
-        paymentMethodOptions:
-          type: object
   securitySchemes:
     basicAuth:
       type: http

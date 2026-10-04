@@ -117,6 +117,20 @@ components:
         instructions:
           type: object
           description: Method-specific instructions — e.g. a PayNow QR image payload or virtual account number and destination bank.
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - paynow
+          - virtual_bank_account
+        referenceId:
+          type: string
+        instructions:
+          type: object
     CreatePaymentRequest:
       type: object
       required:
@@ -152,20 +166,6 @@ components:
           description: ISO 8601 expiry; valid range is 1 hour to 30 days.
         description:
           type: string
-    PaymentMethod:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-          enum:
-          - paynow
-          - virtual_bank_account
-        referenceId:
-          type: string
-        instructions:
-          type: object
   securitySchemes:
     basicAuth:
       type: http
