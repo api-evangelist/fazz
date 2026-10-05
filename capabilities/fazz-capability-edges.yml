@@ -1,0 +1,34 @@
+slug: fazz
+provider: Fazz
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Payments
+  spec_file: fazz-payments-api-openapi.yml
+  capability_id: BC-4250.40
+  capability_id_l1: BC-4250
+  capability_name: Payment Collection & Dunning
+  confidence: 0.75
+  evidence: POST /payments createPayment  Create a payment
+  reason: Core payment acceptance lifecycle (create, list, retrieve payments) on the Fazz Accept API —
+    payment collection. Not subscription-specific, but this is the nearest payment-collection capability
+    in the frame.
+- tag: Payment Methods
+  spec_file: fazz-payment-methods-api-openapi.yml
+  capability_id: BC-4250.40
+  capability_id_l1: BC-4250
+  capability_name: Payment Collection & Dunning
+  confidence: 0.7
+  evidence: POST /payment_methods/{type} createPaymentMethod  Create a payment method
+  reason: Creating and listing payments against payment methods matches 'payment-method management, payment
+    authorisation' directly, for an acceptance platform offering PayNow QR and virtual accounts.
