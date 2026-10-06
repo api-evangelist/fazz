@@ -46,7 +46,7 @@ tags:
 - PayNow
 - Virtual Accounts
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: fazz:fazz-indonesia-payments-api
@@ -141,6 +141,8 @@ apis:
   - type: APIReference
     url: https://docs.fazz.com/reference/accept-payment-methods
 common:
+- url: https://fazz.com/id/newsroom/
+  type: Blog
 - type: CapabilityMap
   url: capabilities/fazz-capability-edges.yml
   name: Fazz Business Capability Map
