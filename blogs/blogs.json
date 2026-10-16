@@ -1,0 +1,14 @@
+{
+  "repo": "fazz",
+  "feeds": [
+    {
+      "source": "https://fazz.com/id/newsroom/",
+      "feed_url": "https://fazz.com/id/newsroom/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-10-10T13:15:00Z"
+}
